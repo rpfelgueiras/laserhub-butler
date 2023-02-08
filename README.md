@@ -17,6 +17,7 @@ SLACK_APP_TOKEN="YOUR BOT TOKEN"
 
 ## To do list
 - [ ] Add long description of the Laserhub Butler application
+- [ ] Refactor code to add some unit tests (extract IFs to small functions)
 
 ## Some useful links
 https://blog.logrocket.com/build-a-slackbot-in-node-js-with-slacks-bolt-api/
