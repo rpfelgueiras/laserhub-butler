@@ -13,10 +13,10 @@ Welcome to the Laserhub Butler Slack application. This is a private application 
 SLACK_SIGNING_SECRET="YOUR SIGNING SECRET"
 SLACK_BOT_TOKEN="YOUR BOT TOKEN"
 SLACK_APP_TOKEN="YOUR BOT TOKEN"
+```
 
 ## To do list
-[] Add long description of the Laserhub Butler application
-[] 
+- [ ] Add long description of the Laserhub Butler application
 
 ## Some useful links
 https://blog.logrocket.com/build-a-slackbot-in-node-js-with-slacks-bolt-api/
