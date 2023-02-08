@@ -16,6 +16,7 @@ SLACK_APP_TOKEN="YOUR BOT TOKEN"
 ```
 
 ## To do list
+
 - [ ] Add long description of the Laserhub Butler application
 - [ ] Refactor code to add some unit tests (extract IFs to small functions)
 
