@@ -16,7 +16,6 @@ SLACK_APP_TOKEN="YOUR BOT TOKEN"
 ```
 
 ## To do list
-
 - [ ] Add long description of the Laserhub Butler application
 - [ ] Refactor code to add some unit tests (extract IFs to small functions)
 
@@ -28,3 +27,7 @@ Application settings - https://api.slack.com/apps/A04P0N7B34G/general
 
 Continue here -> https://slack.dev/bolt-js/tutorial/getting-started
 https://api.slack.com/apps/A04P0N7B34G/slash-commands?
+
+https://www.instructables.com/ServDuino-Arduino-Webserver/ -> HTTP Server in the Arduino
+https://randomnerdtutorials.com/esp32-web-server-arduino-ide/ -> HTML page in the Arduino
+
