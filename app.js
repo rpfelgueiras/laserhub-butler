@@ -1,6 +1,6 @@
 const { App } = require("@slack/bolt");
 require("dotenv").config();
-const moment = require("moment-timezone");
+const { moment } = require("moment-timezone");
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -126,3 +126,6 @@ function isInRange(value, range) {
 //       (inRange ? range : range.slice().reverse()).join(" - ")
 //   );
 // });
+
+
+
