@@ -1,6 +1,5 @@
 const { App } = require("@slack/bolt");
 require("dotenv").config();
-const { moment } = require("moment-timezone");
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -10,42 +9,25 @@ const app = new App({
   logLevel: "debug",
 });
 
-app.message(/^(hi|hello|hey).*/, async ({ context, say }) => {
-  // RegExp matches are inside of context.matches
-  const greeting = context.matches[0];
-
-  await say(`${greeting}, how are you?`);
-});
-
-// This will match any message that contains 👋
-app.message(":wave:", async ({ message, say }) => {
-  await say(`Hello, <@${message.user}>`);
-});
-
-app.message("/^(open the door).*/", async ({ message, say }) => {
-  // await say(`Door, <@${message.user}>`);
-  console.log(message);
-
-  // call remote door opener
-
-  // return success or not :)
-});
-
 app.event("app_mention", async ({ event, context, client, body, say }) => {
   try {
-    if (event.text.indexOf("open the door") < 0) {
+    var butlerRules = require("./butler-rules");
+
+    if (!butlerRules.isThis.theRightCommand(event.text)) {
       await say(
         `<@${event.user}> I can't recognize that order. I am sorry! Want to try again? :pray:`
       );
       return;
     }
 
-    if (event.channel !== process.env.SLACK_STUTTGART_OFFICE_CHANNEL_ID) {
+    if (!butlerRules.isThis.theRightChannel(event.channel)) {
       await say(
         `<@${event.user}> wrong channel! :cry: I can only open the door in the #office-stuttgart channel.`
       );
       return;
     }
+
+    var moment = require("moment-timezone");
 
     // Get user who sent the message
     var userWhoSentMessage = await app.client.users.info({
@@ -54,13 +36,21 @@ app.event("app_mention", async ({ event, context, client, body, say }) => {
 
     // Current time
     var now = moment().utc();
-    var userDate = now.tz(userWhoSentMessage.user.tz).toDate();
+    var userDate = now.tz(userWhoSentMessage.user.tz);
 
-    // Check the time between 8 AM and 6 PM
-    var inRange = isInRange(userDate.getTime(), range);
-    if (!inRange) {
+    // var inRange = isInRange(userDate.getTime(), range);
+    // if (!inRange) {
+    //   await say(
+    //     // `<@${event.user}> I am not allowed to open the door at this time :pray: I am sorry!.`
+    //     `I am not allowed to open the door at this time :pray: I am sorry!.`
+    //   );
+    //   return;
+    // }
+
+    if (!butlerRules.isThis.theRightTime(userDate.format('HH:mm'))) {
       await say(
-        `<@${event.user}> I am not allowed to open the door at this time :pray: I am sorry!.`
+        // `<@${event.user}> I am not allowed to open the door at this time :pray: I am sorry!.`
+        `I am not allowed to open the door at this time :pray: I am sorry!`
       );
       return;
     }
@@ -68,7 +58,8 @@ app.event("app_mention", async ({ event, context, client, body, say }) => {
     // Check if weekday
 
     await say(
-      `<@${event.user}> I will open the door! Give me some seconds :run:`
+      // `<@${event.user}> I will open the door! Give me some seconds :run:`
+      `I will open the door! Give me some seconds :run:`
     );
 
     // await say({
@@ -127,5 +118,23 @@ function isInRange(value, range) {
 //   );
 // });
 
+app.message(/^(hi|hello|hey).*/, async ({ context, say }) => {
+  // RegExp matches are inside of context.matches
+  const greeting = context.matches[0];
 
+  await say(`${greeting}, how are you?`);
+});
 
+// This will match any message that contains 👋
+app.message(":wave:", async ({ message, say }) => {
+  await say(`Hello, <@${message.user}>`);
+});
+
+app.message("/^(open the door).*/", async ({ message, say }) => {
+  // await say(`Door, <@${message.user}>`);
+  console.log(message);
+
+  // call remote door opener
+
+  // return success or not :)
+});
