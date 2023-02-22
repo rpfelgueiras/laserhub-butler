@@ -6,7 +6,7 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   socketMode: true,
   appToken: process.env.SLACK_APP_TOKEN,
-  logLevel: "debug",
+  // logLevel: "debug",
 });
 
 app.event("app_mention", async ({ event, context, client, body, say }) => {
@@ -40,15 +40,15 @@ app.event("app_mention", async ({ event, context, client, body, say }) => {
     var now = moment().utc();
     var userDate = now.tz(userWhoSentMessage.user.tz);
 
-    if (!butler.isThis.theRightTime(userDate.format("HH:mm"))) {
+    console.log('the day is: ' + userDate.isoWeekday());
+
+    if (!butler.isThis.theRightTiming(userDate.isoWeekday(), userDate.format("HH:mm"))) {
       await say(
         // `<@${event.user}> I am not allowed to open the door at this time :pray: I am sorry!.`
         `I am not allowed to open the door at this time :pray: I am sorry!`
       );
       return;
     }
-
-    // Check if weekday
 
     await say(
       // `<@${event.user}> I will open the door! Give me some seconds :run:`

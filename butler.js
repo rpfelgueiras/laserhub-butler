@@ -61,8 +61,8 @@ module.exports.isThis = {
      * @param {*} time
      * @returns
      */
-    theRightTiming: function (time) {
-      return theRightTime(time);
+    theRightTiming: function (day, time) {
+      return this.between8AmAnd6Pm(time) && this.theRightDay(day);
     },
   
     /**
@@ -78,13 +78,14 @@ module.exports.isThis = {
      *
      * @returns
      */
-    theRightDay: function () {
-      return false;
+    theRightDay: function (day) {
+        return isInRange(day, weekDays);
     },
   };
   
-  function isInRange(value, eightAmAndSixPm) {
-    return value >= eightAmAndSixPm[0] && value <= eightAmAndSixPm[1];
+  function isInRange(value, range) {
+    return value >= range[0] && value <= range[range.length - 1]
   }
   
-  const eightAmAndSixPm = ["08:00", "18:00"];
+  const eightAmAndSixPm = ["08:00", "22:00"];
+  const weekDays = [1, 2, 3, 4, 5, 6];
