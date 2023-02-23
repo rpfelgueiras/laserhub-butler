@@ -1,7 +1,7 @@
 var chai = require("chai");
 var expect = chai.expect;
-var should = chai.should();
-var assert = chai.assert;
+// var should = chai.should();
+// var assert = chai.assert;
 
 var butler = require("../butler");
 

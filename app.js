@@ -14,18 +14,20 @@ app.event("app_mention", async ({ event, context, client, body, say }) => {
     var butler = require("./butler");
 
     if (!butler.isThis.theRightCommand(event.text)) {
-      await say(
+      await say({
         // `<@${event.user}> I can't recognize that order. I am sorry! Want to try again? :pray:`
-        `I can't recognize that order. I am sorry! Want to try again? :pray:`
-      );
+        text: `I can't recognize that order. I am sorry! Want to try again? :pray:`,
+        thread_ts: event.ts,
+      });
       return;
     }
 
     if (!butler.isThis.theRightChannel(event.channel)) {
-      await say(
+      await say({
         // `<@${event.user}> wrong channel! :cry: I can only open the door in the #office-stuttgart channel.`
-        `wrong channel! :cry: I can only open the door in the #office-stuttgart channel.`
-      );
+        text: `wrong channel! :cry: I can only open the door in the #office-stuttgart channel.`,
+        thread_ts: event.ts,
+      });
       return;
     }
 
@@ -40,20 +42,29 @@ app.event("app_mention", async ({ event, context, client, body, say }) => {
     var now = moment().utc();
     var userDate = now.tz(userWhoSentMessage.user.tz);
 
-    console.log('the day is: ' + userDate.isoWeekday());
+    console.log("the day is: " + userDate.isoWeekday());
 
-    if (!butler.isThis.theRightTiming(userDate.isoWeekday(), userDate.format("HH:mm"))) {
-      await say(
+    if (
+      !butler.isThis.theRightTiming(
+        userDate.isoWeekday(),
+        userDate.format("HH:mm")
+      )
+    ) {
+      await say({
         // `<@${event.user}> I am not allowed to open the door at this time :pray: I am sorry!.`
-        `I am not allowed to open the door at this time :pray: I am sorry!`
-      );
+        text: `I am not allowed to open the door at this time :pray: I am sorry!`,
+        thread_ts: event.ts,
+      });
       return;
     }
 
-    await say(
+    butler.openDoor();
+
+    await say({
       // `<@${event.user}> I will open the door! Give me some seconds :run:`
-      `I will open the door! Give me some seconds :run:`
-    );
+      text: `I will open the door! Give me some seconds :run:`,
+      thread_ts: event.ts,
+    });
   } catch (error) {
     console.error(error);
   }
