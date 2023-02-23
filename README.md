@@ -16,8 +16,13 @@ SLACK_APP_TOKEN="YOUR BOT TOKEN"
 ```
 
 ## To do list
+
 - [ ] Add long description of the Laserhub Butler application
-- [ ] Refactor code to add some unit tests (extract IFs to small functions)
+- [x] Refactor code to add some unit tests (extract IFs to small functions)
+- [ ] Add image to the Slack bot
+- [ ] Add code coverage "snippet" to GitHub
+- [ ] Where to host this bot?
+
 
 ## Some useful links
 https://blog.logrocket.com/build-a-slackbot-in-node-js-with-slacks-bolt-api/
@@ -30,12 +35,14 @@ https://api.slack.com/apps/A04P0N7B34G/slash-commands?
 
 https://www.instructables.com/ServDuino-Arduino-Webserver/ -> HTTP Server in the Arduino
 https://randomnerdtutorials.com/esp32-web-server-arduino-ide/ -> HTML page in the Arduino
+https://www.electronicwings.com/arduino/esp8266-wifi-module-interfacing-with-arduino-uno -> wifi and Arduino
+https://www.deviceplus.com/arduino/how-to-connect-your-arduino-to-wi-fi/
 https://www.the-diy-life.com/how-long-can-an-arduino-run-on-batteries-i-tested-6-of-the-most-common-boards/ -> Batteries in Arduino
 
 
 Refactor Javascript code
 https://github.com/Lissy93/quick-example-of-testing-in-nodejs
-
+https://gomytech.gomycode.co/en/node-js-design-patterns-module-definitions-patterns/
 
 Arduino
 Servo Motor - https://docs.arduino.cc/learn/electronics/servo-motors - check the code
